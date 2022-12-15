@@ -83,18 +83,24 @@ func (p *Parser) Accept(fn func(p *api.ApiParserParser, visitor *ApiVisitor) int
 
 // Parse is used to parse the api from the specified file name
 func (p *Parser) Parse(filename string) (*Api, error) {
+	// 返回文件的绝对路径
 	abs, err := filepath.Abs(filename)
 	if err != nil {
 		return nil, err
 	}
 
 	p.src = abs
+
+	// 读取文件内容
 	data, err := p.readContent(filename)
 	if err != nil {
 		return nil, err
 	}
 
+	// 把路径填充到importStatck切片中
 	p.importStatck.push(p.src)
+
+	// 解析文件内容
 	return p.parse(filename, data)
 }
 

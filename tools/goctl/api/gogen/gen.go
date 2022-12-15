@@ -71,6 +71,7 @@ func GoCommand(_ *cobra.Command, _ []string) error {
 
 // DoGenProject gen go project files with api file
 func DoGenProject(apiFile, dir, style string) error {
+	// 解析api文件
 	api, err := parser.Parse(apiFile)
 	if err != nil {
 		return err

@@ -17,7 +17,10 @@ type parser struct {
 
 // Parse parses the api file
 func Parse(filename string) (*spec.ApiSpec, error) {
+	// 创建ast解析器
 	astParser := ast.NewParser(ast.WithParserPrefix(filepath.Base(filename)), ast.WithParserDebug())
+
+	// 解析api文件
 	parsedApi, err := astParser.Parse(filename)
 	if err != nil {
 		return nil, err
