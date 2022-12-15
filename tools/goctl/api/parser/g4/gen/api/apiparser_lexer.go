@@ -187,8 +187,12 @@ type ApiParserLexer struct {
 // however, if used within a Golang sync.Pool, the construction cost amortizes well and the
 // objects can be used in a thread-safe manner.
 func NewApiParserLexer(input antlr.CharStream) *ApiParserLexer {
+	// 创建api词法分析器
 	l := new(ApiParserLexer)
+
+	// 创建词法转换器
 	lexerDeserializer := antlr.NewATNDeserializer(nil)
+
 	lexerAtn := lexerDeserializer.DeserializeFromUInt16(serializedLexerAtn)
 	lexerDecisionToDFA := make([]*antlr.DFA, len(lexerAtn.DecisionToState))
 	for index, ds := range lexerAtn.DecisionToState {

@@ -217,7 +217,10 @@ func (p *Parser) invoke(linePrefix, content string) (v *Api, err error) {
 		p.linePrefix = linePrefix
 	}
 
+	// 创建输入流，其实就是把content包装进InputStream对象中
 	inputStream := antlr.NewInputStream(content)
+
+	// 根据输入流，创建词法分析器
 	lexer := api.NewApiParserLexer(inputStream)
 	lexer.RemoveErrorListeners()
 	tokens := antlr.NewCommonTokenStream(lexer, antlr.LexerDefaultTokenChannel)
